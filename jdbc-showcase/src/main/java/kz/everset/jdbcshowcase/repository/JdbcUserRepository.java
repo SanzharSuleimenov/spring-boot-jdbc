@@ -47,9 +47,9 @@ public class JdbcUserRepository implements UserRepository {
   @Override
   public int update(User user) {
     return jdbcTemplate.update("""
-              update my_user 
-              set first_name = ?, 
-                  last_name = ?, 
+              update my_user
+              set first_name = ?,
+                  last_name = ?,
                   birth_date = ?,
                   email = ?
               where id = ?
