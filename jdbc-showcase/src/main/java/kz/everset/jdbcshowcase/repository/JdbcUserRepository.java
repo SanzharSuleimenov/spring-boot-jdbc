@@ -19,15 +19,15 @@ public class JdbcUserRepository implements UserRepository {
   @Override
   public int save(User user) {
     return jdbcTemplate.update("""
-        insert into my_user(first_name, last_name, birth_date, email)
-        values(?,?,?,?)
-        """, user.getFirstName(), user.getLastName(), user.getBirthDate(), user.getEmail());
+        insert into my_user(first_name, last_name, birth_date, email, group_id)
+        values(?,?,?,?,?)
+        """, user.getFirstName(), user.getLastName(), user.getBirthDate(), user.getEmail(), user.getGroupId());
   }
 
   @Override
   public User findById(Long id) {
     List<User> users = jdbcTemplate.query("""
-            select * from my_user m where m.id = ?
+            select * from my_user m where m.user_id = ?
             """,
         new UserRowMapper(),
         id);
@@ -51,8 +51,9 @@ public class JdbcUserRepository implements UserRepository {
               set first_name = ?,
                   last_name = ?,
                   birth_date = ?,
-                  email = ?
-              where id = ?
+                  email = ?,
+                  group_id = ?,
+              where user_id = ?
             """,
         user.getFirstName(), user.getLastName(), user.getBirthDate(),
         user.getEmail(), user.getId()
@@ -61,7 +62,7 @@ public class JdbcUserRepository implements UserRepository {
 
   @Override
   public int deleteById(Long id) {
-    return jdbcTemplate.update("delete my_user where id = ?", id);
+    return jdbcTemplate.update("delete my_user where user_id = ?", id);
   }
 
   @Override

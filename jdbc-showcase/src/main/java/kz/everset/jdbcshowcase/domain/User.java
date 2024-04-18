@@ -7,23 +7,23 @@ public class User {
   private String lastName;
   private String birthDate;
   private String email;
+  private Long groupId;
 
   public User() {
   }
 
-  public User(String firstName, String lastName, String birthDate, String email) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.birthDate = birthDate;
-    this.email = email;
+  public User(String firstName, String lastName, String birthDate, String email, Long groupId) {
+    this(null, firstName, lastName, birthDate, email, groupId);
   }
 
-  public User(Long id, String firstName, String lastName, String birthDate, String email) {
+  public User(Long id, String firstName, String lastName, String birthDate, String email,
+      Long groupId) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.birthDate = birthDate;
     this.email = email;
+    this.groupId = groupId;
   }
 
   public Long getId() {
@@ -66,6 +66,14 @@ public class User {
     this.email = email;
   }
 
+  public Long getGroupId() {
+    return groupId;
+  }
+
+  public void setGroupId(Long groupId) {
+    this.groupId = groupId;
+  }
+
   @Override
   public String toString() {
     return "User{" +
@@ -74,6 +82,7 @@ public class User {
         ", lastName='" + lastName + '\'' +
         ", birthDate='" + birthDate + '\'' +
         ", email='" + email + '\'' +
+        ", groupId='" + groupId + '\'' +
         '}';
   }
 }
